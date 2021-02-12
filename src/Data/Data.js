@@ -3,6 +3,11 @@ import React, { createContext, useState } from "react";
 const DataContext = createContext({});
 
 const DataContextProvider = ({ children }) => {
+  const [categories, setCategories] = useState([
+    "Lebensmittel",
+    "Körperpflege",
+  ]);
+
   const [budget, setBudget] = useState([
     {
       category: "Lebensmittel",
@@ -18,8 +23,7 @@ const DataContextProvider = ({ children }) => {
     },
   ]);
 
-  const value = { budget, setBudget };
-
+  const value = { categories, setCategories, budget, setBudget };
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };
 

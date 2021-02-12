@@ -7,8 +7,8 @@ import { StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
-const CreateScreenOptions = { title: "Create" };
 const styles = StyleSheet.create({ headerButton: { marginRight: 10 } });
+const CreateScreenOptions = { title: "Create" };
 
 const HomeScreenOptions = ({ navigation }) => ({
   title: "Home",
