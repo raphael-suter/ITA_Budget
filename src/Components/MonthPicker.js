@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import moment from "moment";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "native-base";
@@ -12,7 +12,13 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     backgroundColor: "tomato",
   },
-  text: { flex: 1, textAlign: "center", fontSize: 15, color: "white" },
+  text: {
+    flex: 1,
+    textAlign: "center",
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "white",
+  },
   button: { padding: 10 },
 });
 

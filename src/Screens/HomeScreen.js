@@ -1,24 +1,51 @@
 import React, { useContext, useState } from "react";
-import { Text } from "react-native";
 import { DataContext } from "../Data/Data";
-import { List, ListItem } from "native-base";
+import { List } from "native-base";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import MonthPicker from "../Components/MonthPicker";
-import moment from "moment";
+import BudgetListItem from "../Components/BudgetListItem";
+
+const styles = StyleSheet.create({
+  total: {
+    padding: 20,
+    textAlign: "right",
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "gray",
+  },
+  view: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  error: { color: "gray", paddingBottom: 25 },
+});
 
 const HomeScreen = () => {
-  const { budget, setBudget } = useContext(DataContext);
-  const [month, setMonth] = useState(moment().format("M") - 1);
+  const [month, setMonth] = useState(new Date().getMonth());
+  const { budget } = useContext(DataContext);
+  let filteredTotal = 0;
+
+  const filteredBudget = budget
+    .filter(({ date }) => date.getMonth() === month)
+    .map((entry, index) => {
+      filteredTotal += entry.amount;
+      return <BudgetListItem data={entry} key={index} />;
+    });
 
   return (
     <>
       <MonthPicker month={month} setMonth={setMonth} />
-      <List>
-        {budget.map((item, index) => (
-          <ListItem key={index}>
-            <Text>{item}</Text>
-          </ListItem>
-        ))}
-      </List>
+      {filteredBudget.length > 0 ? (
+        <ScrollView>
+          <List>{filteredBudget}</List>
+          <Text style={styles.total}>{filteredTotal.toFixed(2)} CHF</Text>
+        </ScrollView>
+      ) : (
+        <View style={styles.view}>
+          <Text style={styles.error}>No entries found...</Text>
+        </View>
+      )}
     </>
   );
 };
