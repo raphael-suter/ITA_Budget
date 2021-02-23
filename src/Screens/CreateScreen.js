@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
 const CreateScreen = ({ navigation }) => {
   const { categories, budget, setBudget } = useContext(DataContext);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(categories[0] || "");
   const [amount, setAmount] = useState("");
   const [comment, setComment] = useState("");
   const [date, setDate] = useState(moment().format("DD.MM.YYYY"));
@@ -35,19 +35,27 @@ const CreateScreen = ({ navigation }) => {
     }
   };
 
-  const formatDate = () => {
-    if (date.trim() !== "") {
-      setDate(
-        date.length === 10 && moment(date, "DD.MM.YYYY").isValid() ? date : ""
-      );
-    }
-  };
-
   const onSave = () => {
-    formatAmount();
-    formatDate();
+    const isNotEmpty = (input) => input && input.trim() !== "";
 
-    navigation.navigate("HomeScreen");
+    if (
+      isNotEmpty(category) &&
+      isNotEmpty(amount) &&
+      isNotEmpty(comment) &&
+      isNotEmpty(date)
+    ) {
+      setBudget([
+        ...budget,
+        {
+          category,
+          amount: Number.parseFloat(amount),
+          comment,
+          date: moment(date, "DD.MM.YYYY").toDate(),
+        },
+      ]);
+
+      navigation.navigate("HomeScreen");
+    }
   };
 
   useLayoutEffect(() => {
@@ -95,7 +103,6 @@ const CreateScreen = ({ navigation }) => {
           placeholder="Date"
           value={date}
           onChangeText={setDate}
-          onBlur={formatDate}
           keyboardType="numeric"
           style={styles.textInput}
         />
