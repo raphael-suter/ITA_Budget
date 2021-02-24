@@ -27,10 +27,6 @@ const CreateScreen = ({ navigation }) => {
   const [date, setDate] = useState(moment().format("DD.MM.YYYY"));
   const [location, setLocation] = useState(null);
 
-  const categoriesList = categories.map((entry, index) => (
-    <Picker.Item label={entry} value={entry} key={index} />
-  ));
-
   const formatAmount = () => {
     if (amount.trim() !== "") {
       setAmount(Number.parseFloat(amount).toFixed(2).concat(" CHF"));
@@ -89,6 +85,10 @@ const CreateScreen = ({ navigation }) => {
       setLocation(await Location.getCurrentPositionAsync({}));
     })();
   }, []);
+
+  const categoriesList = categories.map((entry, index) => (
+    <Picker.Item label={entry} value={entry} key={index} />
+  ));
 
   return (
     <View>

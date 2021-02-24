@@ -8,7 +8,7 @@ const SettingsScreen = ({ navigation }) => (
     <List>
       <ListItem onPress={() => navigation.navigate("CategoriesScreen")}>
         <Left>
-          <Text>Kategorien</Text>
+          <Text>Categories</Text>
         </Left>
         <Right>
           <Ionicons name="arrow-forward" color="tomato" size={20} />
