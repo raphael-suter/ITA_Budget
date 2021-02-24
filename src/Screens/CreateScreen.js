@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 const CreateScreen = ({ navigation }) => {
   const { categories, budget, setBudget } = useContext(DataContext);
-  const [category, setCategory] = useState(categories[0] || "");
+  const [category, setCategory] = useState(categories[0]);
   const [amount, setAmount] = useState("");
   const [comment, setComment] = useState("");
   const [date, setDate] = useState(moment().format("DD.MM.YYYY"));
