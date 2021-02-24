@@ -1,9 +1,10 @@
-import React, { useContext, useLayoutEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { DataContext } from "../Data/Data";
 import { Picker, StyleSheet, TextInput, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import moment from "moment";
 import { Button } from "native-base";
+import * as Location from "expo-location";
 
 const styles = StyleSheet.create({
   headerButton: { marginRight: 15 },
@@ -24,6 +25,7 @@ const CreateScreen = ({ navigation }) => {
   const [amount, setAmount] = useState("");
   const [comment, setComment] = useState("");
   const [date, setDate] = useState(moment().format("DD.MM.YYYY"));
+  const [location, setLocation] = useState(null);
 
   const categoriesList = categories.map((entry, index) => (
     <Picker.Item label={entry} value={entry} key={index} />
@@ -44,6 +46,10 @@ const CreateScreen = ({ navigation }) => {
       isNotEmpty(comment) &&
       isNotEmpty(date)
     ) {
+      const {
+        coords: { latitude, longitude },
+      } = location;
+
       setBudget([
         ...budget,
         {
@@ -51,6 +57,7 @@ const CreateScreen = ({ navigation }) => {
           amount: Number.parseFloat(amount),
           comment,
           date: moment(date, "DD.MM.YYYY").toDate(),
+          location: { latitude, longitude },
         },
       ]);
 
@@ -67,6 +74,21 @@ const CreateScreen = ({ navigation }) => {
       ),
     });
   }, [category, amount, comment, date]);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Location.requestPermissionsAsync();
+
+      if (status !== "granted") {
+        alert("Permission to access location was denied.");
+        setLocation({ latitude: 0, longitude: 0 });
+
+        return;
+      }
+
+      setLocation(await Location.getCurrentPositionAsync({}));
+    })();
+  }, []);
 
   return (
     <View>
