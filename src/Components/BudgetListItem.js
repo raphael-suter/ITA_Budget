@@ -5,8 +5,8 @@ import moment from "moment";
 import MapView, { Marker } from "react-native-maps";
 
 const styles = StyleSheet.create({
-  listItem: { flexWrap: "wrap" },
-  view: { flex: 1, marginTop: 0, marginBottom: 5 },
+  listItem: { flexWrap: "wrap", alignItems: "flex-start", paddingBottom: 18 },
+  view: { flex: 1 },
   category: { fontWeight: "bold" },
   amount: { fontWeight: "bold", fontSize: 18 },
   map: {

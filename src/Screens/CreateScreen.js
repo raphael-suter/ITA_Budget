@@ -118,7 +118,7 @@ const CreateScreen = ({ navigation }) => {
           onChangeText={setComment}
           style={styles.textInput}
         />
-        <Ionicons name="chatbox" size={22} color="tomato" />
+        <Ionicons name="chatbox-outline" size={22} color="tomato" />
       </View>
       <View style={styles.wrapper}>
         <TextInput
@@ -128,7 +128,7 @@ const CreateScreen = ({ navigation }) => {
           keyboardType="numeric"
           style={styles.textInput}
         />
-        <Ionicons name="calendar" size={22} color="tomato" />
+        <Ionicons name="calendar-outline" size={22} color="tomato" />
       </View>
     </View>
   );

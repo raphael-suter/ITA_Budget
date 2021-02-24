@@ -8,24 +8,18 @@ const DataContextProvider = ({ children }) => {
     "Körperpflege",
   ]);
 
-  const [budget, setBudget] = useState([
-    {
-      category: "Lebensmittel",
-      amount: 20.75,
-      comment: "Alnatura",
-      date: new Date("2021-02-23"),
-      location: { latitude: 0, longitude: 0 },
-    },
-    {
-      category: "Körperpflege",
-      amount: 15.2,
-      comment: "Bare Ware",
-      date: new Date("2021-02-04"),
-      location: { latitude: 0, longitude: 0 },
-    },
-  ]);
+  const [budget, setBudget] = useState([]);
+  const [wishes, setWishes] = useState([]);
 
-  const value = { categories, setCategories, budget, setBudget };
+  const value = {
+    categories,
+    setCategories,
+    budget,
+    setBudget,
+    wishes,
+    setWishes,
+  };
+
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };
 

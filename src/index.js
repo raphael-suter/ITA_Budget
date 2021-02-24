@@ -6,6 +6,7 @@ import HomeTab from "./Tabs/HomeTab";
 import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { DataContextProvider } from "./Data/Data";
+import WishListTab from "./Tabs/WishListTab";
 
 const Tab = createBottomTabNavigator();
 const TabOptions = { activeTintColor: "tomato", inactiveTintColor: "gray" };
@@ -14,6 +15,13 @@ const HomeTabOptions = {
   title: "Home",
   tabBarIcon: ({ size, color }) => (
     <Ionicons name="home" size={size} color={color} />
+  ),
+};
+
+const WishListTabOptions = {
+  title: "Wish list",
+  tabBarIcon: ({ size, color }) => (
+    <Ionicons name="heart" size={size} color={color} />
   ),
 };
 
@@ -32,6 +40,11 @@ const App = () => (
           name="HomeTab"
           component={HomeTab}
           options={HomeTabOptions}
+        />
+        <Tab.Screen
+          name="WishListTab"
+          component={WishListTab}
+          options={WishListTabOptions}
         />
         <Tab.Screen
           name="SettingsTab"
