@@ -1,7 +1,14 @@
 import React, { useContext, useState } from "react";
 import { DataContext } from "../Data/Data";
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import { Button, List, ListItem } from "native-base";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Button, Left, List, ListItem, Right } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
@@ -39,9 +46,23 @@ const CategoriesScreen = ({ navigation }) => {
     }
   };
 
+  const onDelete = (index) => {
+    const temp = categories.slice();
+    temp.splice(index, 1);
+
+    setCategories(temp);
+  };
+
   const categoriesList = categories.map((entry, index) => (
     <ListItem key={index}>
-      <Text>{entry}</Text>
+      <Left>
+        <Text>{entry}</Text>
+      </Left>
+      <Right>
+        <TouchableOpacity onPress={() => onDelete(index)}>
+          <Ionicons name="trash" size={18} color="tomato" />
+        </TouchableOpacity>
+      </Right>
     </ListItem>
   ));
 
