@@ -25,12 +25,22 @@ const read = async (key) => {
 
 const DataContextProvider = ({ children }) => {
   const [categories, _setCategories] = useState([]);
-  const [budget, setBudget] = useState([]);
-  const [wishes, setWishes] = useState([]);
+  const [budget, _setBudget] = useState([]);
+  const [wishes, _setWishes] = useState([]);
 
   const setCategories = (input) => {
     _setCategories(input);
     save("categories", input);
+  };
+
+  const setBudget = (input) => {
+    _setBudget(input);
+    save("budget", input);
+  };
+
+  const setWishes = (input) => {
+    _setWishes(input);
+    save("wishes", input);
   };
 
   const value = {
@@ -45,6 +55,14 @@ const DataContextProvider = ({ children }) => {
   useEffect(() => {
     read("categories").then((data) => {
       _setCategories(data || []);
+    });
+
+    read("budget").then((data) => {
+      _setBudget(data || []);
+    });
+
+    read("wishes").then((data) => {
+      _setWishes(data || []);
     });
   }, []);
 

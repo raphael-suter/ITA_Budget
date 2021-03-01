@@ -27,7 +27,7 @@ const HomeScreen = () => {
   let filteredTotal = 0;
 
   const filteredBudget = budget
-    .filter(({ date }) => date.getMonth() === month)
+    .filter(({ date }) => new Date(date).getMonth() === month)
     .map((entry, index) => {
       filteredTotal += entry.amount;
       return <BudgetListItem data={entry} key={index} />;
